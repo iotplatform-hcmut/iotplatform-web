@@ -1,0 +1,19 @@
+.app-layout-content {
+    background: var(--app__color-backgroud-component);
+    margin: 24px 16px;
+    padding: 24px;
+}
+
+.app-layout-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-layout {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    background: var(--app__color-backgroud);
+}

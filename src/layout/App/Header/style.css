@@ -1,0 +1,7 @@
+.app-layout--header {
+    background: var(--app__color-backgroud-component);
+    padding: 16px 8px;
+    margin: 0px 0px;
+    line-height: 48px;
+    height: 48px;
+}

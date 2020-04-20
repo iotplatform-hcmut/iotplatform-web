@@ -1,0 +1,10 @@
+.app-layout-footer {
+    margin: 48px 0;
+    padding: 0 16px;
+    text-align: center;
+}
+
+.app-layout-footer__copyright {
+    color: var(--app__color-text-secondary);
+    font-size: var(--app__size-font--base);
+}
