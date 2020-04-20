@@ -3,7 +3,7 @@ import { Typography } from 'antd'
 
 const { Title, Paragraph } = Typography
 
-const Main = () => {
+const Main: React.FunctionComponent  = () => {
   return (
       <Typography>
         <Title>Introduction</Title>

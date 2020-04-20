@@ -7,21 +7,23 @@ import {
 import PageHome from 'src/page/home'
 import Page404 from 'src/page/404'
 
+export const THEME: 'light' | 'dark' = 'light'
 const PREFIX: string = '/admin'
+
 export const LIST_ROUTE: IRoute[] = [
     {
         key: 'home',
         name: 'Home',
         icon: HomeOutlined,
         page: PageHome,
-        isHide: true,
+        // isHide: false,
     },
     {
         key: '404',
         name: '404',
         icon: CloseCircleOutlined,
         page: Page404,
-        isHide: true,
+        // isHide: false,
     },  
 ]
 

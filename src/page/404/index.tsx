@@ -2,6 +2,7 @@ import { Button, Result } from 'antd'
 import { HomeOutlined } from '@ant-design/icons'
 import React from 'react'
 import { useHistory } from 'react-router-dom'
+
 const Main: React.FunctionComponent = () => {
   const history = useHistory()
 
