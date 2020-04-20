@@ -7,7 +7,8 @@ import { Layout } from 'antd'
 import 'src/layout/App/style.css'
 
 const Main: FunctionComponent = ({ children }) => {
-    return <section className='app-layout'>
+    return (
+    <section className='app-layout'>
         <section className='app-layout-section'>
             <Header />
             <Layout
@@ -17,7 +18,7 @@ const Main: FunctionComponent = ({ children }) => {
             </Layout>
             <Footer />
         </section>
-    </section>
+    </section> )
 }
 
 export default Main
