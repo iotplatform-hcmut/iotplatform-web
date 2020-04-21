@@ -1,8 +1,28 @@
 import { Form, Input, Button } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 import 'src/page/login/style.css'
+import { doSignInWithEmailAndPassword } from 'src/container/firebase/Auth';
+import { useHistory } from 'react-router-dom';
 
 const Main: React.FunctionComponent = () => {
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [errorMess, setErrorMess] = useState('')
+    const history = useHistory()
+
+    const onLogin = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+
+        doSignInWithEmailAndPassword(username, password)
+            .then(() => {
+                setUsername('')
+                setPassword('')
+                history.push('/home');
+            })
+            .catch(error => {
+                setErrorMess(error.message)
+            });
+        event.preventDefault();
+    };
 
     return (
         <div>
@@ -15,15 +35,13 @@ const Main: React.FunctionComponent = () => {
                 <Form
                     name="basic"
                     initialValues={{ remember: true }}
-                //   onFinish={}
-                //   onFinishFailed={}
                 >
                     <Form.Item
                         label="Username"
                         name="username"
                         rules={[{ required: true, message: 'Please input your username!' }]}
                     >
-                        <Input />
+                        <Input onChange={e => { setUsername(e.target.value) }} />
                     </Form.Item>
 
                     <Form.Item
@@ -31,15 +49,16 @@ const Main: React.FunctionComponent = () => {
                         name="password"
                         rules={[{ required: true, message: 'Please input your password!' }]}
                     >
-                        <Input.Password />
+                        <Input.Password onChange={e => { setPassword(e.target.value) }} />
                     </Form.Item>
 
                     <Form.Item>
-                        <Button type="primary" htmlType="submit">
+                        <Button type="primary" htmlType="submit" onClick={onLogin}>
                             Login
                     </Button>
                     </Form.Item>
                 </Form>
+                <p>{errorMess}</p>
             </div>
 
         </div>
