@@ -1,8 +1,13 @@
 import { Form, Input, Button } from 'antd';
 import React, { useState } from 'react';
 import 'src/page/login/style.css'
-import { doSignInWithEmailAndPassword } from 'src/container/firebase/Auth';
+import auth, { provider } from 'src/container/firebase'
 import { useHistory } from 'react-router-dom';
+import { 
+    GoogleOutlined,
+    GithubOutlined,
+} 
+from '@ant-design/icons'
 
 const Main: React.FunctionComponent = () => {
     const [username, setUsername] = useState('')
@@ -10,9 +15,34 @@ const Main: React.FunctionComponent = () => {
     const [errorMess, setErrorMess] = useState('')
     const history = useHistory()
 
-    const onLogin = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    const onLoginEmail = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+        auth.signInWithEmailAndPassword(username, password)
+            .then(() => {
+                setUsername('')
+                setPassword('')
+                history.push('/home');
+            })
+            .catch(error => {
+                setErrorMess(error.message)
+            });
+        event.preventDefault();
+    };
 
-        doSignInWithEmailAndPassword(username, password)
+    const onLoginGoogle = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+        auth.signInWithPopup(provider.google)
+            .then(() => {
+                setUsername('')
+                setPassword('')
+                history.push('/home');
+            })
+            .catch(error => {
+                setErrorMess(error.message)
+            });
+        event.preventDefault();
+    };
+
+    const onLoginGithub = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+        auth.signInWithPopup(provider.github)
             .then(() => {
                 setUsername('')
                 setPassword('')
@@ -53,9 +83,22 @@ const Main: React.FunctionComponent = () => {
                     </Form.Item>
 
                     <Form.Item>
-                        <Button type="primary" htmlType="submit" onClick={onLogin}>
+                        <Button type="primary" htmlType="submit" onClick={onLoginEmail}>
                             Login
-                    </Button>
+                        </Button>
+
+                        <Button style={{ color: 'black', fontWeight: 500, marginLeft: '100px' }}
+                            type="link" shape="circle" icon={<GoogleOutlined />}
+                            onClick={onLoginGoogle}>
+                            Google
+                        </Button>
+
+                        <Button style={{ color: 'black', fontWeight: 500, marginLeft: '100px' }}
+                            type="link" shape="circle" icon={<GithubOutlined />}
+                            onClick={onLoginGithub}>
+                            Github
+                        </Button>
+
                     </Form.Item>
                 </Form>
                 <p>{errorMess}</p>

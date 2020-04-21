@@ -5,7 +5,7 @@ import Header from 'src/layout/App/Header'
 import Footer from 'src/layout/App/Footer'
 import SideBar from 'src/layout/App/SideBar'
 import { Layout } from 'antd'
-import auth from 'src/container/firebase/Auth'
+import auth from 'src/container/firebase'
 import 'src/layout/App/style.css'
 import { Redirect } from 'react-router-dom'
 interface IProp {
