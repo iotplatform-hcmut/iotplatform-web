@@ -1,7 +1,11 @@
-.app-layout--header {
-    background: var(--app__color-backgroud-component);
-    padding: 16px 8px;
-    margin: 0px 0px;
-    line-height: 48px;
-    height: 48px;
+.app-layout-header {
+    height: 52px;
+    line-height: 52px;
+    background-color: #ffffff;
+}
+
+.app-layout-header__dropdown-menu {
+    width: fit-content;
+    cursor: pointer;
+    font-weight: 700;
 }

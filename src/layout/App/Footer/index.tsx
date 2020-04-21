@@ -20,7 +20,7 @@ const Main: FunctionComponent = () => {
         backgroundColor: '#1d1924',
       }}
     >
-      <p style={{ fontWeight: 700 }}>2020 Copyright © by  ZMedia Data</p>
+      <p>2020 Copyright © by  ZMedia Data</p>
     </div>
   )
 }
