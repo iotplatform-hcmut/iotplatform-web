@@ -1,6 +1,7 @@
 import { Form, Input, Button } from 'antd';
 import React from 'react';
 import 'src/page/login/style.css'
+import Footer from 'src/layout/App/Footer'
 
 const Main: React.FunctionComponent = () => {
 
@@ -40,6 +41,7 @@ const Main: React.FunctionComponent = () => {
                     </Button>
                     </Form.Item>
                 </Form>
+                <Footer />
             </div>
 
         </div>

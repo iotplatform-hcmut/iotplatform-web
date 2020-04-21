@@ -2,14 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import 'antd/dist/antd.less' 
+import 'antd/dist/antd.less'
 import 'src/style/common.css'
 import 'src/style.css'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <App />,
   document.getElementById('root')
 );
 

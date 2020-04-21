@@ -2,15 +2,13 @@ import { ReactNode, FunctionComponent } from "react";
 import {
     CloseCircleOutlined,
     HomeOutlined,
-    LoginOutlined,
 } from '@ant-design/icons';
 
 import PageHome from 'src/page/home'
 import Page404 from 'src/page/404'
-import PageLogin from 'src/page/login'
 
 export const THEME: 'light' | 'dark' = 'light'
-const PREFIX: string = '/admin'
+const PREFIX: string = ''
 
 export const LIST_ROUTE: IRoute[] = [
     {
@@ -25,13 +23,6 @@ export const LIST_ROUTE: IRoute[] = [
         name: '404',
         icon: CloseCircleOutlined,
         page: Page404,
-        // isHide: false,
-    },  
-    {
-        key: 'login',
-        name: 'Login',
-        icon: LoginOutlined,
-        page: PageLogin,
         // isHide: false,
     },
 ]

@@ -16,12 +16,14 @@ const Main: FunctionComponent<IProp> = ({ children, keyActive }) => {
         <section className='app-layout'>
             <SideBar keyActive={keyActive} />
             <section className='app-layout-section'>
-                <Header />
-                <Layout
-                    className='app-layout-content'
-                >
-                    {children}
-                </Layout>
+                <React.StrictMode>
+                    <Header />
+                    <Layout
+                        className='app-layout-content'
+                    >
+                        {children}
+                    </Layout>
+                </React.StrictMode>
                 <Footer />
             </section>
         </section>)
