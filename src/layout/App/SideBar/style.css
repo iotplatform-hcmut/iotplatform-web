@@ -1,0 +1,18 @@
+.app-layout-logo {
+    text-align: center;
+    height: 48px;
+    line-height: 48px;
+}
+
+.app-layout-logo__image {
+    max-width: 100%;
+    cursor: pointer;
+    max-height: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.app-layout-sidebar {
+    width: 300px;
+    background: var(--app__color-backgroud-component);
+}
