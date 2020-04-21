@@ -6,7 +6,6 @@ import { Menu } from "antd"
 import { useHistory } from "react-router-dom"
 import { ClickParam } from "antd/lib/menu"
 
-import logo from 'src/logo.svg'
 import { IRoute, MAP_ROUTE, THEME, LIST_ROUTE } from "src/config/route"
 
 interface ITitle {
@@ -108,7 +107,10 @@ const Main: FunctionComponent<IProp> = ({ keyActive }) => {
         className="app-layout-sidebar"
         >
             <header className='app-layout-logo'>
-                <img className='app-layout-logo__image' src={logo} alt='Z Media Data' onClick={goHome} />
+                <img 
+                    className='app-layout-logo__image' 
+                    src="https://static-zmp3.zadn.vn/skins/zmp3-v5.2/images/logo-mp-3.svg" 
+                    alt='Z Media Data' onClick={goHome} />
             </header>
             {renderMainMenu()}
         </aside>
