@@ -53,9 +53,9 @@ const Main: FunctionComponent<IProp> = ({ keyActive }) => {
                     if (listRoute) {
                         return renderSubMenu(route)
                     }
-                    const name: string = route.name
-                    const icon: ReactNode = route.icon
-                    const key: string = route.key
+                    const name: string = routeThis.name
+                    const icon: ReactNode = routeThis.icon
+                    const key: string = routeThis.key
                     return (
                         <Menu.Item key={key}>
                             <Title name={name} icon={icon} />
