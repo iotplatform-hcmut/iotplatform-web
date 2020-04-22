@@ -16,14 +16,14 @@ export const LIST_ROUTE: IRoute[] = [
         name: 'Home',
         icon: HomeOutlined,
         page: PageHome,
-        // isHide: false,
     },
     {
         key: '404',
         name: '404',
         icon: CloseCircleOutlined,
         page: Page404,
-        // isHide: false,
+        isHide: true,
+        isNotAuth: true,
     },
 ]
 
@@ -33,6 +33,7 @@ export interface IRoute {
     icon: ReactNode
     path?: string,
     isHide?: boolean,
+    isNotAuth?: boolean,
     listRoute?: IRoute[]
     page?: FunctionComponent
 }

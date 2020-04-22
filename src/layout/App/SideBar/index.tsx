@@ -32,7 +32,7 @@ const Main: FunctionComponent<IProp> = ({ keyActive }) => {
     }
 
     const goHome = (): void => {
-        history.push('/')
+        history.push('/home')
     }
 
     const renderSubMenu = (route: IRoute): ReactNode => {
