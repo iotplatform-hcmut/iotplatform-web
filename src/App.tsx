@@ -13,6 +13,19 @@ const renderRoute = (route: IRoute): JSX.Element => {
   const path: string = route.path as string
   const key: string = route.key
   const page: FunctionComponent = route.page as FunctionComponent
+  const isNotAuth: boolean | undefined = route.isNotAuth
+  if(isNotAuth) {
+    return (
+      <Route key={key} path={path}>{
+        () => (
+          <>
+            {createElement(page)}
+          </>
+        )
+      }</Route>
+    )
+  }
+
   return (
     <Route key={key} path={path}>{
       () => (

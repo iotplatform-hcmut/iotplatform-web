@@ -3,12 +3,14 @@ import { Menu, Dropdown } from 'antd';
 import { LogoutOutlined } from '@ant-design/icons';
 import { useHistory } from "react-router-dom"
 import 'src/layout/App/Header/style.css'
+import auth from 'src/container/firebase';
 
 
 const Main: FunctionComponent = () => {
   const history = useHistory()
 
   const goLogin = (): void => {
+    auth.signOut()
     history.push('/login')
   }
 
