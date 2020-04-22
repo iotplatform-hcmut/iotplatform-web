@@ -1,19 +1,30 @@
 import { Form, Input, Button } from 'antd';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'src/page/login/style.css'
 import auth, { provider } from 'src/container/firebase'
 import { useHistory } from 'react-router-dom';
-import { 
+import {
     GoogleOutlined,
     GithubOutlined,
-} 
-from '@ant-design/icons'
+}
+    from '@ant-design/icons'
 
 const Main: React.FunctionComponent = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [errorMess, setErrorMess] = useState('')
     const history = useHistory()
+
+    useEffect(() => {
+        auth.onAuthStateChanged(user => {
+            alert("You have signed in")
+            if (user) history.push('/home')
+        });
+        return () => {
+            
+        }
+    }, [history])
+
 
     const onLoginEmail = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
         auth.signInWithEmailAndPassword(username, password)
