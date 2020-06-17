@@ -1,0 +1,1 @@
+rsync -aurv build/* khoidd@iotplatform.xyz:/home/khoidd/web_service/
