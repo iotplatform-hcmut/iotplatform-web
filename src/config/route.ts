@@ -2,13 +2,16 @@ import { ReactNode, FunctionComponent } from "react";
 import {
     CloseCircleOutlined,
     HomeOutlined,
-    BugOutlined
+    ControlOutlined,
+    TeamOutlined,
+    FileAddOutlined
 } from '@ant-design/icons';
 
-import PageHome from 'src/page/home'
+import PageHome from 'src/page/dashboard'
 import Page404 from 'src/page/404'
 import PageControl from 'src/page/control'
 import PageAbout from 'src/page/about'
+import PageAdd from 'src/page/addNew'
 
 export const THEME: 'light' | 'dark' = 'dark'
 const PREFIX: string = ''
@@ -25,25 +28,40 @@ export const LIST_ROUTE: IRoute[] = [
         name: '404',
         icon: CloseCircleOutlined,
         page: Page404,
-        isHide: false,
+        isHide: true,
         isNotAuth: false,
     },
     {
-        key: 'Control',
-        name: 'Control',
-        icon: 'BugOutlined',
-        page: PageControl,
+        key: 'Motor',
+        name: 'Motor',
+        icon: ControlOutlined,
         isHide: false,
-        isNotAuth: false
+        isNotAuth: false,
+        listRoute: [{
+            key: 'Control',
+            name: 'Control',
+            icon: ControlOutlined,
+            page: PageControl,
+            isHide: false,
+            isNotAuth: false
+        },
+        {
+            key: 'Addnewmotor',
+            name: 'Create New',
+            icon: FileAddOutlined,
+            page: PageAdd,
+            isHide: false,
+            isNotAuth: false
+        }]
     },
     {
         key: 'About',
         name: 'About',
-        icon: 'BugOutlined',
+        icon: TeamOutlined,
         page: PageAbout,
         isHide: false,
         isNotAuth: false
-    }
+    },
 ]
 
 export interface IRoute {

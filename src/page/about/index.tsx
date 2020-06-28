@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Form, Button, Col, Table, Row } from 'antd';
-import { useHistory } from 'react-router-dom'
 import HumidityApi, { UserInformation } from 'src/service/humidity'
-import Column from 'antd/lib/table/Column';
+import moment from 'moment';
 
 const Main: React.FunctionComponent = () => {
     const [data,setData] = useState<UserInformation[]>([]);
@@ -39,6 +38,7 @@ const Main: React.FunctionComponent = () => {
             title: 'Birth Day',
             dataIndex : 'birthday',
             key: 'birthday',
+            render: (birthday : number) => moment(birthday).format("DD-MM-YYYY")
         },
     ]
     return (
