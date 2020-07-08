@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import 'src/page/control/style.css'
-import { Col, Table, Row, Tag, Space, Button } from 'antd';
-import MotorForm from 'src/component/form'
+import { Col, Table, Row, Tag, Space, Button, Modal, Form, Input, InputNumber } from 'antd';
 import HumidityApi, { MotorInformation, ReturnMessage } from 'src/service/humidity'
 import moment from 'moment';
-import humidity from 'src/service/humidity';
-import MotorImage from './components/MotorImage'
+import './style.css'
+import FormItemInput from 'antd/lib/form/FormItemInput';
 
-const listMotor = [
+interface Motor {
+    id: string
+    url: string
+    event?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void
+}
+
+const listMotor: Motor[] = [
     { id: "1", url: "https://www.talkwalker.com/images/2020/blog-headers/image-analysis.png" },
     { id: "2", url: "https://www.talkwalker.com/images/2020/blog-headers/image-analysis.png" },
     { id: "3", url: "https://www.talkwalker.com/images/2020/blog-headers/image-analysis.png" },
@@ -15,16 +20,34 @@ const listMotor = [
     { id: "5", url: "https://www.talkwalker.com/images/2020/blog-headers/image-analysis.png" },
 ]
 
+interface MotorImage {
+    event?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void,
+    id: string,
+    url: string
+}
+
 const Main: React.FunctionComponent = () => {
     const [data, setData] = useState<MotorInformation[]>([]);
+    const [visible, setVisible] = useState<boolean>(false);
+    const [waterValue, setWaterValue] = useState<number>()
+    const [motorId, setMotorId] = useState<string>("")
+
+    const showModal = (id: string) => () => {
+        setVisible(true)
+        setMotorId(id)
+    };
 
     useEffect(() => {
         (async () => {
             const motorInfo: MotorInformation[] = await HumidityApi.get.getMotorInformation()
             setData(motorInfo)
+            for (let i = 0; i < listMotor.length; ++i) {
+                listMotor[i]["event"] = () => {
+                    setVisible(true)
+                };
+            }
         })()
     }, []);
-
 
     const onDeleteMotor = (id: string) => () => {
         (async () => {
@@ -38,6 +61,14 @@ const Main: React.FunctionComponent = () => {
             setData(data.filter(e => e.id != id))
         })()
     }
+
+    const handleSubmit = () => {
+        setVisible(false)
+    };
+
+    const handleCancel = () => {
+        setVisible(false)
+    };
 
 
     const dataColumns = [
@@ -112,18 +143,59 @@ const Main: React.FunctionComponent = () => {
                 (() => {
                     const listImage = []
                     for (let i = 0; i < Math.ceil(listMotor.length / 3); ++i) {
-                        listImage.push(<MotorImage lsMotor={listMotor.slice(3 * i, 3 * i + 3)} ></MotorImage>)
+                        listImage.push(
+                            // <MotorImage key={i} lsMotor={listMotor.slice(3 * i, 3 * i + 3)} ></MotorImage>
+                            <Row>
+                                {
+                                    listMotor.slice(3 * i, 3 * i + 3).map((e: MotorImage) => (
+                                        <Col span={8} key={e.id}>
+                                            <div>
+                                                <p> MÁY BƠM NƯỚC SỐ {e.id}</p>
+                                                <Form>
+                                                    <img
+                                                        src={e.url}
+                                                        width="200"
+                                                        height="150"
+                                                    />
+                                                </Form>
+                                                <Button
+                                                    type="primary"
+                                                    htmlType="button"
+                                                    onClick={showModal(e.id)}
+                                                >
+                                                    Bật Máy bơm
+                                                </Button>
+                                            </div>
+                                        </Col>
+                                    ))
+                                }
+                            </Row>
+                        )
                     }
                     return listImage
                 })()
             }
-            <div>
+            <div className="app-control">
                 <Table
                     tableLayout="fixed"
                     columns={dataColumns}
                     dataSource={data}
                 >
                 </Table>
+                <Modal
+                    visible={visible}
+                    onOk={handleSubmit}
+                    onCancel={handleCancel}
+                >
+                    <Form>
+                        <p> MÁY BƠM SỐ {motorId}</p>
+                        <p> Điền lượng nước muốn bơm vào ôm bên dưới (0 -> 1023):</p>
+                        <Form.Item name={['motor', 'value']} label="Water value" rules={[{ required: true }]}>
+                            <InputNumber min={0} max={1023} defaultValue={0}
+                                onChange={() => setWaterValue(waterValue)} />
+                        </Form.Item>
+                    </Form>
+                </Modal>
             </div>
         </div>
     )
