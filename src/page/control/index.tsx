@@ -29,13 +29,13 @@ interface MotorImage {
 const Main: React.FunctionComponent = () => {
     const [data, setData] = useState<MotorInformation[]>([]);
     const [visible, setVisible] = useState<boolean>(false);
-    const [waterValue, setWaterValue] = useState<number>()
+    const [waterValue, setWaterValue] = useState(0)
     const [motorId, setMotorId] = useState<string>("")
 
-    const showModal = (id: string) => () => {
+    const showModal = () => {
         setVisible(true)
-        setMotorId(id)
     };
+
 
     useEffect(() => {
         (async () => {
@@ -64,11 +64,26 @@ const Main: React.FunctionComponent = () => {
 
     const handleSubmit = () => {
         setVisible(false)
+        console.log(motorId, waterValue)
     };
 
     const handleCancel = () => {
         setVisible(false)
     };
+
+    function onWaterLevelChange(value: any) {
+        if (value < 0) {
+            value = 0
+        }
+        else {
+            if (value > 1023) {
+                // value = 1023
+            }
+            else {
+                setWaterValue(value)
+            }
+        }
+    }
 
 
     const dataColumns = [
@@ -158,13 +173,6 @@ const Main: React.FunctionComponent = () => {
                                                         height="150"
                                                     />
                                                 </Form>
-                                                <Button
-                                                    type="primary"
-                                                    htmlType="button"
-                                                    onClick={showModal(e.id)}
-                                                >
-                                                    Bật Máy bơm
-                                                </Button>
                                             </div>
                                         </Col>
                                     ))
@@ -176,6 +184,12 @@ const Main: React.FunctionComponent = () => {
                 })()
             }
             <div className="app-control">
+                <Button
+                    type="primary"
+                    onClick={showModal}
+                    block>
+                    Bật Máy bơm
+                </Button>
                 <Table
                     tableLayout="fixed"
                     columns={dataColumns}
@@ -189,15 +203,22 @@ const Main: React.FunctionComponent = () => {
                 >
                     <Form>
                         <p> MÁY BƠM SỐ {motorId}</p>
-                        <p> Điền lượng nước muốn bơm vào ôm bên dưới (0 -> 1023):</p>
-                        <Form.Item name={['motor', 'value']} label="Water value" rules={[{ required: true }]}>
+                        <p> Điền Id của Motor cần bơm nước:</p>
+                        <Form.Item label="Motor Id" rules={[{ required: true }]}>
+                            <Input
+                                onChange={e => setMotorId(e.target.value)} value={motorId}
+                            />
+                        </Form.Item>
+                        <p> Điền lượng nước muốn bơm vào ôm bên dưới (0 - 1023):</p>
+                        <Form.Item label="Water value" rules={[{ required: true }]}>
                             <InputNumber min={0} max={1023} defaultValue={0}
-                                onChange={() => setWaterValue(waterValue)} />
+                                onChange={onWaterLevelChange}
+                            />
                         </Form.Item>
                     </Form>
                 </Modal>
             </div>
-        </div>
+        </div >
     )
 };
 
