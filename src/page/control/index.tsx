@@ -4,7 +4,6 @@ import { Col, Table, Row, Tag, Space, Button, Modal, Form, Input, InputNumber } 
 import HumidityApi, { MotorInformation, ReturnMessage } from 'src/service/humidity'
 import moment from 'moment';
 import './style.css'
-import FormItemInput from 'antd/lib/form/FormItemInput';
 
 interface Motor {
     id: string
@@ -58,7 +57,7 @@ const Main: React.FunctionComponent = () => {
             else {
                 alert("delete motor fail")
             }
-            setData(data.filter(e => e.id != id))
+            setData(data.filter(e => e.id !== id))
         })()
     }
 
@@ -110,7 +109,7 @@ const Main: React.FunctionComponent = () => {
             render: (state: boolean) => {
                 let stateColor: string
                 let stateText: string
-                if (state == false) {
+                if (state === false) {
                     stateColor = "volcano"
                     stateText = "OFF"
                 }

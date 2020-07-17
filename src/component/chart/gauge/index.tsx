@@ -10,7 +10,7 @@ solidGauge(Highcharts);
 
 interface PropsType {
   title: string;
-  value: string;
+  value: number;
 }
 
 const Main: FunctionComponent<PropsType> = (props) => {
@@ -24,7 +24,7 @@ const Main: FunctionComponent<PropsType> = (props) => {
     },
 
     title: {
-      text: "Speedometer",
+      text: props.title,
     },
 
     pane: {
@@ -68,7 +68,7 @@ const Main: FunctionComponent<PropsType> = (props) => {
     // the value axis
     yAxis: {
       min: 0,
-      max: 200,
+      max: 1023,
 
       minorTickInterval: "auto",
       minorTickWidth: 1,
@@ -91,17 +91,17 @@ const Main: FunctionComponent<PropsType> = (props) => {
       plotBands: [
         {
           from: 0,
-          to: 120,
+          to: 500,
           color: "#55BF3B", // green
         },
         {
-          from: 120,
-          to: 160,
+          from: 500,
+          to: 700,
           color: "#DDDF0D", // yellow
         },
         {
-          from: 160,
-          to: 200,
+          from: 700,
+          to: 1023,
           color: "#DF5353", // red
         },
       ],
@@ -110,7 +110,7 @@ const Main: FunctionComponent<PropsType> = (props) => {
     series: [
       {
         name: "Speed",
-        data: [80],
+        data: [props.value],
         tooltip: {
           valueSuffix: " %",
         },

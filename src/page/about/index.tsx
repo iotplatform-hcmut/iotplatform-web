@@ -1,56 +1,55 @@
 import React, { useEffect, useState } from 'react'
-import { Form, Button, Col, Table, Row } from 'antd';
+import { Table } from 'antd';
 import HumidityApi, { UserInformation } from 'src/service/humidity'
 import moment from 'moment';
 
 const Main: React.FunctionComponent = () => {
-    const [data,setData] = useState<UserInformation[]>([]);
+    const [data, setData] = useState<UserInformation[]>([]);
 
     useEffect(() => {
         (async () => {
-          const userInfo:UserInformation[] = await HumidityApi.get.getUserInformation()
-          setData(userInfo)
+            const userInfo: UserInformation[] = await HumidityApi.get.getUserInformation()
+            setData(userInfo)
         })()
-      }, [])
+    }, [])
 
-    const dataColumns =[
+    const dataColumns = [
         {
             title: 'Name',
-            dataIndex : 'name',
+            dataIndex: 'name',
             key: 'name',
         },
         {
             title: 'User Name',
-            dataIndex : 'username',
+            dataIndex: 'username',
             key: 'username',
         },
         {
             title: 'E-mail',
-            dataIndex : 'email',
+            dataIndex: 'email',
             key: 'email',
         },
         {
             title: 'Phone Number',
-            dataIndex : 'phone',
+            dataIndex: 'phone',
             key: 'phone',
         },
         {
             title: 'Birth Day',
-            dataIndex : 'birthday',
+            dataIndex: 'birthday',
             key: 'birthday',
-            render: (birthday : number) => moment(birthday).format("DD-MM-YYYY")
+            render: (birthday: number) => moment(birthday).format("DD-MM-YYYY")
         },
     ]
     return (
         <div>
             <Table
-                columns = {dataColumns}
-                dataSource = {data}
-                >
+                columns={dataColumns}
+                dataSource={data}
+            >
             </Table>
         </div>
     )
-  }
-  
-  export default Main
-  
+}
+
+export default Main

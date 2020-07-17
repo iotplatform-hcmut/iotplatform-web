@@ -11,20 +11,24 @@ const Main: React.FunctionComponent = () => {
 
   useEffect(() => {
     (async () => {
-      const d1_1: HumidityDataType = await HumidityApi.get.getValueByDeviceId(
-        "Mois",
-        10
-      );
-      setSeries([d1_1]);
+      const data: HumidityDataType[] = await HumidityApi.get.getValueByDeviceId(["d0_1", "d0_2"], 10);
+      setSeries(data);
     })();
   }, []);
+
+  const currAvg = series.reduce((sum, s) => sum + s.data[s.data.length - 1], 0) / series.length;
+  const max = series.reduce((sum, s) => Math.max(...s.data) > sum ? Math.max(...s.data) : sum, 0);
+  const min = series.reduce((sum, s) => Math.min(...s.data) < sum ? Math.min(...s.data) : sum, 1023);
+  const avg = series.reduce((sum, s) => sum + s.data.reduce((a, b) => a + b, 0), 0) / series.length;
+
+
 
   return (
     <>
       <OptionForm />
       <Row>
         <Col span={6}>
-          <GaugeChart title="Min" value="10%" />
+          <GaugeChart title="Humidity" value={currAvg} />
         </Col>
 
         <Col span={18}>
@@ -39,7 +43,7 @@ const Main: React.FunctionComponent = () => {
         </Col>
       </Row>
 
-      <ValueForm title="Summary" min="10%" max="20%" avg="15%" />
+      <ValueForm title="Summary" min={min} max={max} avg={avg} />
     </>
   );
 };

@@ -4,10 +4,10 @@ const host = 'https://iotplatform.xyz/api';
 
 export default {
   get: {
-    getValueByDeviceId: async (device_id: string, limit: number) => {
-      const url = `${host}/humidity?device_id=${device_id}&limit=${limit}`;
+    getValueByDeviceId: async (ids: string[], limit: number) => {
+      const url = `${host}/mois?ids=${ids.join(',')}&limit=${limit}`;
       const { data } = await Axios.get(`${url}`);
-      const result: HumidityDataType = data;
+      const result: HumidityDataType[] = data;
 
       return result;
     },
