@@ -9,9 +9,9 @@ import {
 
 import PageHome from 'src/page/dashboard'
 import Page404 from 'src/page/404'
-import PageControl from 'src/page/control'
+import PageControl from 'src/page/control/home'
 import PageAbout from 'src/page/about'
-import PageAdd from 'src/page/addNew'
+import PageAdd from 'src/page/control/create'
 
 export const THEME: 'light' | 'dark' = 'dark'
 const PREFIX: string = ''
@@ -32,27 +32,20 @@ export const LIST_ROUTE: IRoute[] = [
         isNotAuth: false,
     },
     {
-        key: 'Motor',
-        name: 'Motor',
+        key: 'Control',
+        name: 'Control',
         icon: ControlOutlined,
+        page: PageControl,
         isHide: false,
-        isNotAuth: false,
-        listRoute: [{
-            key: 'Control',
-            name: 'Control',
-            icon: ControlOutlined,
-            page: PageControl,
-            isHide: false,
-            isNotAuth: false
-        },
-        {
-            key: 'Addnewmotor',
-            name: 'Create New',
-            icon: FileAddOutlined,
-            page: PageAdd,
-            isHide: false,
-            isNotAuth: false
-        }]
+        isNotAuth: false
+    },
+    {
+        key: 'Addnewmotor',
+        name: 'Manager',
+        icon: FileAddOutlined,
+        page: PageAdd,
+        isHide: false,
+        isNotAuth: false
     },
     {
         key: 'About',
@@ -61,7 +54,7 @@ export const LIST_ROUTE: IRoute[] = [
         page: PageAbout,
         isHide: false,
         isNotAuth: false
-    },
+    }
 ]
 
 export interface IRoute {

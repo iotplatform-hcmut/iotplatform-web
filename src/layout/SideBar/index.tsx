@@ -123,7 +123,7 @@ const Main: FunctionComponent<IProp> = ({ keyActive }) => {
                                     src="https://lledogrupo.com/wp-content/uploads/2020/01/Logo-IoT-Blanco-300x122.png"
                                     alt='IoT Platform' onClick={goHome} />
 
-                                <Button style={{color:"#ffffff"}} type="link" onClick={() => { setIsMini(!isMini) }}><DoubleLeftOutlined /></Button>
+                                <Button style={{ color: "#ffffff" }} type="link" onClick={() => { setIsMini(!isMini) }}><DoubleLeftOutlined /></Button>
                             </>
                         )
                 }

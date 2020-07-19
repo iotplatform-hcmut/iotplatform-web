@@ -68,7 +68,7 @@ const Main: FunctionComponent<PropsType> = (props) => {
     // the value axis
     yAxis: {
       min: 0,
-      max: 1023,
+      max: 100,
 
       minorTickInterval: "auto",
       minorTickWidth: 1,
@@ -91,17 +91,17 @@ const Main: FunctionComponent<PropsType> = (props) => {
       plotBands: [
         {
           from: 0,
-          to: 500,
+          to: 20,
           color: "#55BF3B", // green
         },
         {
-          from: 500,
-          to: 700,
+          from: 21,
+          to: 60,
           color: "#DDDF0D", // yellow
         },
         {
-          from: 700,
-          to: 1023,
+          from: 61,
+          to: 100,
           color: "#DF5353", // red
         },
       ],
@@ -110,7 +110,7 @@ const Main: FunctionComponent<PropsType> = (props) => {
     series: [
       {
         name: "Speed",
-        data: [props.value],
+        data: [props.value.toFixed(2)],
         tooltip: {
           valueSuffix: " %",
         },

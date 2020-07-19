@@ -319,7 +319,7 @@ module.exports = function (webpackEnv) {
           loader: 'less-loader', // compiles Less to CSS
           options: {
             modifyVars: {
-              'primary-color': '#8e44ad',
+              'primary-color': '#000DB1',
             },
             javascriptEnabled: true,
           },

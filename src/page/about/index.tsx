@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Table } from 'antd';
-import HumidityApi, { UserInformation } from 'src/service/humidity'
+import HumidityApi, { UserInformation } from 'src/service/iotapi'
 import moment from 'moment';
 
 const Main: React.FunctionComponent = () => {
@@ -35,10 +35,10 @@ const Main: React.FunctionComponent = () => {
             key: 'phone',
         },
         {
-            title: 'Birth Day',
+            title: 'Birthday',
             dataIndex: 'birthday',
             key: 'birthday',
-            render: (birthday: number) => moment(birthday).format("DD-MM-YYYY")
+            render: (birthday: number) => moment(birthday * 1000).format("DD-MM-YYYY")
         },
     ]
     return (
