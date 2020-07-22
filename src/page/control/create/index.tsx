@@ -25,7 +25,7 @@ const Main: React.FunctionComponent = () => {
       title: 'Id',
       dataIndex: 'id',
       key: 'id',
-      render: (text: React.ReactNode) => <a>{text}</a>,
+      render: (text: React.ReactNode) => <Tag color="blue">{text}</Tag  >,
     },
     {
       title: 'Position',
@@ -95,23 +95,8 @@ const Main: React.FunctionComponent = () => {
     wrapperCol: { offset: 8, span: 16 },
   };
 
-  const validateMessages = {
-    required: '${label} is required!',
-    types: {
-      email: '${label} is not validate email!',
-      number: '${label} is not a validate number!',
-    },
-    number: {
-      range: '${label} must be between ${min} and ${max}',
-    },
-  };
-
   const onReset = () => {
-    setId("")
-    setPosition("")
-    setDecription("")
-    setRelay(moment(moment.now()))
-    setState(true)
+    window.location.reload();
   };
 
   const onDeleteMotor = (id: string) => () => {
@@ -144,9 +129,9 @@ const Main: React.FunctionComponent = () => {
   }
 
   return (
-    <>
+    <div style={{ overflowY: 'scroll' }}>
       <Card>
-        <Form {...layout} name="nest-messages" validateMessages={validateMessages}>
+        <Form {...layout} name="nest-messages" >
           <Form.Item name={['user', 'id']} label="Motor Id" rules={[{ required: true }]}>
             <Input onChange={e => setId(e.target.value)} value={id} />
           </Form.Item>
@@ -156,13 +141,13 @@ const Main: React.FunctionComponent = () => {
           <Form.Item name={['user', 'description']} label="Description" rules={[{ required: true }]}>
             <Input.TextArea onChange={e => setDecription(e.target.value)} value={description} />
           </Form.Item>
-          <Row style={{ marginLeft: 350, marginRight: 300 }}>
-            <Col span="12">
+          <Row style={{ marginLeft: 350, marginRight: 400 }}>
+            <Col span="15">
               <Form.Item label="Relay Time: ">
                 <DatePicker onChange={e => { if (e != null) setRelay(e) }} defaultValue={relay} />
               </Form.Item>
             </Col>
-            <Col span="12">
+            <Col span="9">
               <Form.Item label="State: ">
                 <Switch checked={state} onClick={_ => setState(!state)} />
               </Form.Item>
@@ -189,7 +174,7 @@ const Main: React.FunctionComponent = () => {
         >
         </Table>
       </Card>
-    </>
+    </div>
   );
 };
 

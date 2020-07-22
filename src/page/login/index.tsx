@@ -3,11 +3,7 @@ import React, { useState, useEffect } from 'react';
 import 'src/page/login/style.css'
 import auth, { provider } from 'src/firebase'
 import { useHistory } from 'react-router-dom';
-import {
-    GoogleOutlined,
-    GithubOutlined,
-}
-    from '@ant-design/icons'
+import { GoogleOutlined } from '@ant-design/icons'
 
 const Main: React.FunctionComponent = () => {
     const [username, setUsername] = useState('')
@@ -17,10 +13,10 @@ const Main: React.FunctionComponent = () => {
 
     useEffect(() => {
         auth.onAuthStateChanged(user => {
-            if (user) {history.push('/home')}
+            if (user) { history.push('/home') }
         });
         return () => {
-            
+
         }
     }, [history])
 
@@ -40,19 +36,6 @@ const Main: React.FunctionComponent = () => {
 
     const onLoginGoogle = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
         auth.signInWithPopup(provider.google)
-            .then(() => {
-                setUsername('')
-                setPassword('')
-                history.push('/home');
-            })
-            .catch(error => {
-                setErrorMess(error.message)
-            });
-        event.preventDefault();
-    };
-
-    const onLoginGithub = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-        auth.signInWithPopup(provider.github)
             .then(() => {
                 setUsername('')
                 setPassword('')
@@ -101,12 +84,6 @@ const Main: React.FunctionComponent = () => {
                             type="link" shape="circle" icon={<GoogleOutlined />}
                             onClick={onLoginGoogle}>
                             Google
-                        </Button>
-
-                        <Button style={{ color: 'black', fontWeight: 500, marginLeft: '100px' }}
-                            type="link" shape="circle" icon={<GithubOutlined />}
-                            onClick={onLoginGithub}>
-                            Github
                         </Button>
 
                     </Form.Item>

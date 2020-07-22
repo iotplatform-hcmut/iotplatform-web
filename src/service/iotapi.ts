@@ -52,6 +52,14 @@ export default {
       return result;
     },
 
+    getAnomaly: async () => {
+      const url = `${host}/anomaly`;
+      const { data } = await Axios.get(`${url}`);
+      const result: AnomalyInfomattion = data;
+
+      return result;
+    },
+
     pushMQTT: async (ids: string[], state: number, value: number) => {
       const url = `${host}/motor/publish?ids=${ids.join(',')}&value=${value}&state=${state}`;
       const { data } = await Axios.get(`${url}`);
@@ -132,6 +140,13 @@ export interface HistoryInformation {
   id: string;
   timestamp: number;
   value: number;
+}
+
+export interface AnomalyInfomattion {
+  origin: number[];
+  season: number[];
+  trend: number[];
+  residual: number[];
 }
 
 export interface ReturnMessage {

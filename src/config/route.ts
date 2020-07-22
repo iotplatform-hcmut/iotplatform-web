@@ -4,14 +4,17 @@ import {
     HomeOutlined,
     ControlOutlined,
     TeamOutlined,
-    FileAddOutlined
+    FileAddOutlined,
+    IssuesCloseOutlined
 } from '@ant-design/icons';
 
 import PageHome from 'src/page/dashboard'
 import Page404 from 'src/page/404'
-import PageControl from 'src/page/control/home'
+import PageMotorControl from 'src/page/control/home'
+import PageMotorCreate from 'src/page/control/create'
+import PageAnomaly from 'src/page/anomaly'
 import PageAbout from 'src/page/about'
-import PageAdd from 'src/page/control/create'
+
 
 export const THEME: 'light' | 'dark' = 'dark'
 const PREFIX: string = ''
@@ -32,18 +35,26 @@ export const LIST_ROUTE: IRoute[] = [
         isNotAuth: false,
     },
     {
-        key: 'Control',
+        key: 'ControlMotor',
         name: 'Control',
         icon: ControlOutlined,
-        page: PageControl,
+        page: PageMotorControl,
         isHide: false,
         isNotAuth: false
     },
     {
-        key: 'Addnewmotor',
+        key: 'CreateMotor',
         name: 'Manager',
         icon: FileAddOutlined,
-        page: PageAdd,
+        page: PageMotorCreate,
+        isHide: false,
+        isNotAuth: false
+    },
+    {
+        key: 'Anomaly',
+        name: 'Anomaly',
+        icon: IssuesCloseOutlined,
+        page: PageAnomaly,
         isHide: false,
         isNotAuth: false
     },

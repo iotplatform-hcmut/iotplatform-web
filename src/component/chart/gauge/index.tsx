@@ -110,7 +110,7 @@ const Main: FunctionComponent<PropsType> = (props) => {
     series: [
       {
         name: "Speed",
-        data: [props.value.toFixed(2)],
+        data: [parseFloat(props.value.toFixed(2))],
         tooltip: {
           valueSuffix: " %",
         },

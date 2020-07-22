@@ -42,15 +42,21 @@ const Main: React.FunctionComponent = () => {
       setChecked(checked);
       setSeries(series);
     })();
-  }, []);
+  }, [endTime, startTime]);
 
   const currAvg = series.reduce((sum, s) => sum + s.data[s.data.length - 1], 0) / series.length / 10.23;
   const max = series.reduce((sum, s) => Math.max(...s.data) > sum ? Math.max(...s.data) : sum, 0) / 10.23;
   const min = series.reduce((sum, s) => Math.min(...s.data) < sum ? Math.min(...s.data) : sum, 10.23);
   const avg = series.reduce((sum, s) => sum + s.data.reduce((a, b) => a + b, 0), 0) / (series.length * 4) / 10.23;
 
+  console.log(currAvg)
+  console.log(max)
+  console.log(min)
+  console.log(avg)
+
+
   return (
-    <>
+    <div style={{ overflowY: 'scroll' }}>
       <Card style={{ marginBottom: 10 }}>
         <Form layout="inline">
           <Form.Item label="Device: ">
@@ -101,7 +107,7 @@ const Main: React.FunctionComponent = () => {
       </Card>
       <Row>
         <Col span={6}>
-          <GaugeChart title="Humidity" value={currAvg} />
+          <GaugeChart title="Humidity" value={currAvg ? currAvg : 30} />
         </Col>
 
         <Col span={18}>
@@ -116,8 +122,8 @@ const Main: React.FunctionComponent = () => {
         </Col>
       </Row>
 
-      <ValueForm title="Summary" min={min} max={max} avg={avg} />
-    </>
+      <ValueForm title="Summary" min={min ? min : 10} max={max ? max : 90} avg={avg ? avg : 50} />
+    </div>
   );
 };
 

@@ -42,7 +42,7 @@ const Main: React.FunctionComponent = () => {
         },
     ]
     return (
-        <div>
+        <div style={{ overflowY: 'scroll' }}>
             <Table
                 columns={dataColumns}
                 dataSource={data}

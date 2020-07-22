@@ -23,14 +23,26 @@ const Main: React.FunctionComponent = () => {
         })()
     }, []);
 
-    const onControl = () => {
+    const onTurnOn = () => {
         (async () => {
             const lsDevice = motor.map((item, idx) => checked != null ? checked[idx] ? item.id : "" : "").filter(e => e !== '')
             const messge: ReturnMessage = await HumidityApi.get.pushMQTT(lsDevice, 1, value)
             if (messge.status === "ok") alert("Success")
             else alert("fail")
+            const historyInfo: HistoryInformation[] = await HumidityApi.get.getAllHistory()
+            setHistory(historyInfo)
         })()
     }
+
+    const onTurnOff = () => {
+        (async () => {
+            const lsDevice = motor.map((item, idx) => checked != null ? checked[idx] ? item.id : "" : "").filter(e => e !== '')
+            const messge: ReturnMessage = await HumidityApi.get.pushMQTT(lsDevice, 0, 0)
+            if (messge.status === "ok") alert("Success")
+            else alert("fail")
+        })()
+    }
+
     const historyColumns = [
         {
             title: 'Id',
@@ -117,7 +129,7 @@ const Main: React.FunctionComponent = () => {
     ]
 
     return (
-        <div>
+        <div style={{ overflowY: 'scroll' }}>
             <Card>
                 <Form
                     layout="inline"
@@ -143,7 +155,10 @@ const Main: React.FunctionComponent = () => {
                         />
                     </Form.Item>
                     <Form.Item style={{ alignItems: "right" }}>
-                        <Button type="primary" onClick={onControl}>Submit</Button>
+                        <Button type="primary" onClick={onTurnOn}>Turn On</Button>
+                    </Form.Item>
+                    <Form.Item style={{ alignItems: "right" }}>
+                        <Button type="dashed" onClick={onTurnOff}>Turn Off</Button>
                     </Form.Item>
                 </Form>
             </Card>
